@@ -6,11 +6,16 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart', 'ojs/ojlegend', 'ojs/ojchart'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart', 'ojs/ojlegend', 'ojs/ojchart','ojs/ojselectcombobox'],
  function(oj, ko, $) {
   
     function IncidentsViewModel() {
       var self = this;
+
+      this.val = ko.observable("4");
+      this.valueChangedHandler = function (event) {
+        console.log(event.detail.value);
+      }
 
       var data = {
         "January" :  [39,42,42,56,49,22,23,21,33,23,37,39,36,32,35,43,32,42,42,40,36,40,39,39,42,31,30,34,36,38,26],

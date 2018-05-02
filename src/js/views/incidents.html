@@ -4,6 +4,11 @@
  -->
 <div class="oj-hybrid-padding">
   <h1>月度能耗</h1>
+  <oj-select-one id="basicSelect" value="{{val}}"  on-value-changed="[[valueChangedHandler]]"  style="max-width:20em">
+    <oj-option value="2">2月份</oj-option>
+    <oj-option value="3">3月份</oj-option>
+    <oj-option value="4">4月份</oj-option>
+  </oj-select-one>
   <div>
     <div class="oj-flex-item" style="display:inline-block;">
       <h3 >April</h3>
