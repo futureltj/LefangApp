@@ -7,26 +7,68 @@
 
         <div id='chart-container'>
             <h2>High Temperature Histogram</h2>
-            <oj-chart id="barChart" type="bar" series="[[barHighsSeriesValue]]" groups="[[barGroupsValue]]" legend.rendered="off" style-defaults.bar-gap-ratio="0"
-                x-axis.title="Temperature (°F)" x-axis.max-size="150px" y-axis.max="50" y-axis.title="Number of Days" value-formats.series.tooltip-display="off"
-                value-formats.group.tooltip-label="Temperature" value-formats.value.tooltip-label="Number of Days" animation-on-display="auto"
-                animation-on-data-change="auto" style="width:100%;max-width: 850px;height:300px;">
+            <oj-chart
+                id="barChart"
+                type="bar"
+                series="[[barHighsSeriesValue]]"
+                groups="[[barGroupsValue]]"
+                legend.rendered="off"
+                style-defaults.bar-gap-ratio="0"
+                x-axis.title="Temperature (°F)"
+                x-axis.max-size="150px"
+                y-axis.max="50"
+                y-axis.title="Number of Days"
+                value-formats.series.tooltip-display="off"
+                value-formats.group.tooltip-label="Temperature"
+                value-formats.value.tooltip-label="Number of Days"
+                animation-on-display="auto"
+                animation-on-data-change="auto"
+                style="width:100%;max-width: 850px;height:300px;">
             </oj-chart>
 
             <h2>Low Temperature Histogram</h2>
-            <oj-chart id="barChart1" type="bar" series="[[barLowsSeriesValue]]" groups="[[barGroupsValue]]" legend.rendered="off" style-defaults.bar-gap-ratio="0"
-                x-axis.title="Temperature (°F)" x-axis.max-size="150px" y-axis.max="50" y-axis.title="Number of Days" value-formats.series.tooltip-display="off"
-                value-formats.group.tooltip-label="Temperature" value-formats.value.tooltip-label="Number of Days" animation-on-display="auto"
-                animation-on-data-change="auto" style="width:100%;max-width: 850px;height:300px;">
+            <oj-chart
+                id="barChart1"
+                type="bar"
+                series="[[barLowsSeriesValue]]"
+                groups="[[barGroupsValue]]"
+                legend.rendered="off"
+                style-defaults.bar-gap-ratio="0"
+                x-axis.title="Temperature (°F)"
+                x-axis.max-size="150px"
+                y-axis.max="50"
+                y-axis.title="Number of Days"
+                value-formats.series.tooltip-display="off"
+                value-formats.group.tooltip-label="Temperature"
+                value-formats.value.tooltip-label="Number of Days"
+                animation-on-display="auto"
+                animation-on-data-change="auto"
+                style="width:100%;max-width: 850px;height:300px;">
             </oj-chart>
 
             <h2>Daily Temperatures</h2>
-            <oj-chart id="lineChart" type="line" series="[[lineSeriesValue]]" groups="[[lineGroupsValue]]" legend.rendered="off" y-axis.title="Temperature (°F)"
-                time-axis-type="enabled" value-formats.series.tooltip-display="off" value-formats.value.tooltip-label="Temperature"
-                animation-on-display="auto" animation-on-data-change="auto" style="width:100%;max-width: 850px;height:300px;">
+            <oj-chart
+                id="lineChart"
+                type="line"
+                series="[[lineSeriesValue]]"
+                groups="[[lineGroupsValue]]"
+                legend.rendered="off"
+                y-axis.title="Temperature (°F)"
+                time-axis-type="enabled"
+                value-formats.series.tooltip-display="off"
+                value-formats.value.tooltip-label="Temperature"
+                animation-on-display="auto"
+                animation-on-data-change="auto"
+                style="width:100%;max-width: 850px;height:300px;">
             </oj-chart>
 
-            <oj-legend id="legend1" orientation="horizontal" sections="[[legendSections]]" halign="center" valign="middle" style="width:100%;max-width: 850px;height:25px;">
+            <oj-legend
+                id="legend1"
+                orientation="horizontal"
+                sections="[[legendSections]]"
+                halign="center"
+                valign="middle"
+                style="width:100%;max-width: 850px;height:25px;">
             </oj-legend>
         </div>
 
