@@ -12,9 +12,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
     function DashboardViewModel() {
       var self = this;
 
-      self.stackValue = ko.observable('on');
+      
+
+      self.stackValue = ko.observable('off');
         self.orientationValue = ko.observable('vertical');
-        self.dualY = ko.observable('off');
+        self.dualY = ko.observable('on');
      
         self.splitterValue = ko.observable(0.5);
         
@@ -22,7 +24,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         var dualYSeries = [{name: "Series 1", items: [42, 55, 36, 22]},
                            {name: "Series 2", items: [32, 39, 36, 27]},
                            {name: "Series 3", items: [34, 30, 50, 46], assignedToY2: "on"}];
-    
+                           
+        var dualYSeries2 = [{name: "Series 1", items: [2, 55, 36, 22]},
+                           {name: "Series 2", items: [32, 39, 36, 27]},
+                           {name: "Series 3", items: [34, 30, 50, 46], assignedToY2: "on"}];
         var dualYGroups = ["Group A", "Group B", "Group C", "Group D"];        
    
         self.barSeriesValue = ko.observableArray(dualYSeries);
@@ -37,6 +42,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
             document.getElementById('splitterPosition').disabled = (event.detail.value === 'off');
         };
         
+
+        self.button2Text=ko.observable('同比');
+      self.buttonClick = function(event) {
+        if(self.button2Text()==='同比'){
+          self.button2Text('环比');
+          self.barSeriesValue(dualYSeries2);
+        }else{
+          self.button2Text('同比');
+          self.barSeriesValue(dualYSeries);
+        }
+      };
+
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
