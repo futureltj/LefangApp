@@ -19,8 +19,8 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         "April": [51,67,64,60,61,63,62,45,43,56,57,66,68,65,72,64,71,80,64,57,65,69,52,52,62,64,62,71,78,67]};
         var colorHandler = new oj.ColorAttributeGroupHandler();
         var legendItems = [];
-        var temp = ["10-20°F","20-30°F","30-40°F","40-50°F","50-60°F","60-70°F","70-80°F"];
-        var colors = ["267db3", "47bdef", "6ddbdb", "a2bf39", "fad55c", "ffb54d", "ed6647", "ed6647"];
+        var temp = ["-10～-5°C","-5～0°C","0～5°C","5～10°C","10～15°C","15～20°C","20～25°C","≥26°C"];
+        var colors = ["267db3", "66a3c9","47bdef", "6ddbdb", "a2bf39", "fad55c", "ffb54d", "ed6647"];
   
         var getPictoItems = function (month, monthIndex){
           var pictoItems = [];
@@ -35,7 +35,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
               i--;
             }
             else
-              pictoItems.push({name: month+' '+(i+1)+" ("+val+"°F)", color: "#"+colors[Math.floor(val/10)-1]});
+              pictoItems.push({name: month+' '+(i+1)+" ("+val+"°C)", color: "#"+colors[Math.floor(val/10)-1]});
           }
           return pictoItems;
         }

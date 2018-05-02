@@ -15,7 +15,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
       
 
       self.stackValue = ko.observable('off');
-        self.orientationValue = ko.observable('vertical');
         self.dualY = ko.observable('on');
      
         self.splitterValue = ko.observable(0.5);
@@ -36,7 +35,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
    
         self.barSeriesValue = ko.observableArray(dualYSeries);
         self.barGroupsValue = ko.observableArray(dualYGroups);
-        
+        var converterFactory = oj.Validation.converterFactory('number');
+        var decimalConverter = converterFactory.createConverter({minimumFractionDigits: 2, maximumFractionDigits: 2});
+        var percentConverter = converterFactory.createConverter({style: 'percent'});
         /* toggle buttons*/
         self.dualYOptions = [
             {id: 'on', label: 'on', value: 'on'},
