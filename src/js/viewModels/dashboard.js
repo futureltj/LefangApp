@@ -16,7 +16,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
 
       self.stackValue = ko.observable('off');
         self.dualY = ko.observable('on');
-     
+        self.orientationValue = ko.observable('vertical');
         self.splitterValue = ko.observable(0.5);
         
         /* chart data */
