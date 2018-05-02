@@ -15,36 +15,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'viewModels/dashboard'],
       self.buttonClick2 = function (event) {
         oj.Router.rootInstance.go('dashboard');
       }
-      // Below are a set of the ViewModel methods invoked by the oj-module component.
-      // Please reference the oj-module jsDoc for additional information.
-
-      /**
-       * Optional ViewModel method invoked after the View is inserted into the
-       * document DOM.  The application can put logic that requires the DOM being
-       * attached here. 
-       * This method might be called multiple times - after the View is created 
-       * and inserted into the DOM and after the View is reconnected 
-       * after being disconnected.
-       */
-      self.connected = function () {
-        // Implement if needed
-        console.log(dash.selectedItemsValue())
-      };
-
-      /**
-       * Optional ViewModel method invoked after the View is disconnected from the DOM.
-       */
-      self.disconnected = function () {
-        // Implement if needed
-      };
-
-      /**
-       * Optional ViewModel method invoked after transition to the new View is complete.
-       * That includes any possible animation between the old and the new View.
-       */
-      self.transitionCompleted = function () {
-        // Implement if needed
-      };
 
       var colorHandler = new oj.ColorAttributeGroupHandler();
       colorHandler.addMatchRule("high", '#ed6647');
@@ -98,21 +68,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'viewModels/dashboard'],
       };
 
       // Data for the bar chart
-      var barHighsSeries = [{ name: "Highs Frequency", items: createHistogramData(hiTemps, 20, 0, 100), color: colorHandler.getValue("high") }];
-      var barLowsSeries = [{ name: "Lows Frequency", items: createHistogramData(lowTemps, 20, 0, 100), color: colorHandler.getValue("low") }];
+      var barHighsSeries = [{ name: "Highs Frequency", items: createHistogramData(hiTemps, 5, 0, 100), color: colorHandler.getValue("high") }];
+      var barLowsSeries = [{ name: "Lows Frequency", items: createHistogramData(lowTemps, 5, 0, 100), color: colorHandler.getValue("low") }];
       var barGroups = [];
-      for (var i = 0; i < 20; i++) {
-        barGroups.push((i * 5 + 1) + "-" + (i + 1) * 5);
+      for (var i = 0; i < 5; i++) {
+        barGroups.push((i * 20 + 1) + "-" + (i + 1) * 20);
       }
 
       this.barHighsSeriesValue = ko.observableArray(barHighsSeries);
       this.barLowsSeriesValue = ko.observableArray(barLowsSeries);
       this.barGroupsValue = ko.observableArray(barGroups);
 
-      var lineSeries = [{ name: "High", items: hiTemps, color: colorHandler.getValue("high") },
+      var lineSeries = [
       { name: "Low", items: lowTemps, color: colorHandler.getValue("low") }];
       var lineGroups = [];
-      for (var i = 0; i < 365; i++) {
+      for (var i = 0; i < 30; i++) {
         lineGroups.push(new Date(1388552400000 + 86400000 * i).toISOString());
       }
       this.lineSeriesValue = ko.observableArray(lineSeries);
@@ -120,9 +90,63 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'viewModels/dashboard'],
 
       /* create legend */
       this.legendSections = [{
-        items: [{ color: colorHandler.getValue("high"), text: "High", id: "high" },
+        items: [
         { color: colorHandler.getValue("low"), text: "Low", id: "low" }]
       }];
+
+
+      // Below are a set of the ViewModel methods invoked by the oj-module component.
+      // Please reference the oj-module jsDoc for additional information.
+
+      /**
+       * Optional ViewModel method invoked after the View is inserted into the
+       * document DOM.  The application can put logic that requires the DOM being
+       * attached here. 
+       * This method might be called multiple times - after the View is created 
+       * and inserted into the DOM and after the View is reconnected 
+       * after being disconnected.
+       */
+      self.connected = function () {
+        // Implement if needed
+        var month="";
+        if(dash.selectedItemsValue().length>0){
+          var tmp = dash.selectedItemsValue()[0]
+          if(tmp.indexOf(";")>0){
+            month = tmp.split(";")[1];
+            month = month.trim()
+          }
+        }
+        if(month=="四月"){
+          month="4"
+        }
+        if(month=="三月"){
+          month="3"
+        }
+        if(month=="二月"){
+          month="2"
+        }
+        if(month=="一月"){
+          month="1"
+        }
+        console.log("当前月份："+month)
+      };
+
+      /**
+       * Optional ViewModel method invoked after the View is disconnected from the DOM.
+       */
+      self.disconnected = function () {
+        // Implement if needed
+      };
+
+      /**
+       * Optional ViewModel method invoked after transition to the new View is complete.
+       * That includes any possible animation between the old and the new View.
+       */
+      self.transitionCompleted = function () {
+        // Implement if needed
+      };
+
+      
     }
 
     /*
