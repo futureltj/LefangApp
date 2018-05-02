@@ -1,0 +1,26 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+
+<div class="oj-hybrid-padding">
+  <h1>能耗环比/同比</h1>
+  <div style="clear:both"></div>
+  <oj-chart id="barChart"
+      type="bar"
+      series="[[barSeriesValue]]"
+      groups="[[barGroupsValue]]" 
+      animation-on-display="auto"
+      animation-on-data-change="auto"
+      orientation="[[orientationValue]]"
+      stack="[[stackValue]]"
+      split-dual-y="[[dualY]]"
+      splitter-position="[[splitterValue]]"
+      legend.position="top"
+      y-axis.title="Y1 Axis Title"
+      y2-axis.title="Y2 Axis Title"
+      style="max-width:500px;width:100%;height:350px;">
+  </oj-chart>
+  </div>
+
+</div>

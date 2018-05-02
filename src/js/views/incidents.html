@@ -1,0 +1,57 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <h1>月度能耗</h1>
+  <div>
+    <div class="oj-flex-item" style="display:inline-block;">
+      <h3 >April</h3>
+      <div style="word-spacing:6px;margin-left:6px;">S M T W T F S</div>
+      <oj-picto-chart id='pictochart4'
+        items="[[aprilItems]]"
+        layout="horizontal"
+        row-height="20" column-count="7"
+        tooltip.renderer="[[tooltipFunction]]">
+      </oj-picto-chart>
+    </div>
+    <oj-legend 
+      id='legend1'
+      class="oj-flex-item" 
+      style="display:inline-block;max-height:50px;width:100%;"
+      orientation="horizontal"
+      sections="[[legendSections]]"
+      symbol-width="15"
+      symbol-height="15"
+      halign="center">
+    </oj-legend>
+  </div>
+
+  <div id='chart-container' >
+    <oj-legend id="legend1"
+        orientation="horizontal"
+        sections="[[legendSections]]"
+        halign="center"
+        valign="middle"
+        hidden-categories="{{hiddenCategoriesValue}}"
+        highlighted-categories="{{highlightedCategoriesValue}}"
+        hover-behavior="dim"
+        hide-and-show-behavior="on"
+        style="width:100%;max-width: 650px; height:25px;">
+    </oj-legend>
+    <oj-chart id="lineChart"
+        type="line"
+        series="[[lineSeriesValue]]"
+        groups="[[lineGroupsValue]]"
+        legend.rendered="off"
+        y-axis="[[yAxisData]]"
+        x-axis.title= "Test Number"
+        animation-on-display="auto"
+        animation-on-data-change="auto"
+        hidden-categories="{{hiddenCategoriesValue}}"
+        highlighted-categories="{{highlightedCategoriesValue}}"
+        hover-behavior="dim"
+        style="width:100%;max-width: 650px;height:300px;">
+    </oj-chart>
+</div>
+</div>
