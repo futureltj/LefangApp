@@ -42,17 +42,27 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
             document.getElementById('splitterPosition').disabled = (event.detail.value === 'off');
         };
         
+      self.drinkValues = [
+          {id: 'tong', label: '同比'},
+          {id: 'huan',    label: '环比'},
+      ];
+      self.button2Text=ko.observable('tong');
 
-        self.button2Text=ko.observable('同比');
       self.buttonClick = function(event) {
-        if(self.button2Text()==='同比'){
-          self.button2Text('环比');
+        if(event.detail.value==='tong'){
           self.barSeriesValue(dualYSeries2);
         }else{
-          self.button2Text('同比');
           self.barSeriesValue(dualYSeries);
         }
       };
+      self.selectedItemsValue=ko.observable([])
+      self.selectionListener = function(event) {
+        var eventInfo = '';
+        var detail = event.detail;
+        console.log(detail)
+        console.log(self.selectedItemsValue())
+        oj.Router.rootInstance.go('about');
+      }
 
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.

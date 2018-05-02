@@ -6,11 +6,15 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
- function(oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'jquery','viewModels/dashboard'],
+ function(oj, ko, $,dash) {
   
     function AboutViewModel() {
       var self = this;
+      
+      self.buttonClick2 = function(event){
+        oj.Router.rootInstance.go('dashboard');
+    }
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
@@ -24,6 +28,7 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
        */
       self.connected = function() {
         // Implement if needed
+        console.log(dash.selectedItemsValue())
       };
 
       /**
