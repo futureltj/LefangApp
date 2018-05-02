@@ -91,7 +91,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
             this.highlightedCategoriesValue = ko.observableArray([]);
 
             /* create legend */
-            this.legendSections = [{items: [{color: colorHandler.getValue("math"), text: "Math Scores", id: "math"},
+            this.legendSections2 = [{items: [{color: colorHandler.getValue("math"), text: "Math Scores", id: "math"},
                             {color: colorHandler.getValue("english"), text: "English Scores", id: "english"}]}];
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
