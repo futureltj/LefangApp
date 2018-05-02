@@ -4,7 +4,7 @@
  -->
 
 <div class="oj-hybrid-padding">
-  <h1>能耗环比/同比</h1>
+  <h2>能耗环比/同比</h2>
   <div style="clear:both"></div>
   <oj-chart id="barChart"
       type="bar"
@@ -15,10 +15,10 @@
       orientation="[[orientationValue]]"
       stack="[[stackValue]]"
       split-dual-y="[[dualY]]"
-      splitter-position="[[splitterValue]]"
+      splitter-position="0.6"
       legend.position="top"
-      y-axis.title="Y1 Axis Title"
-      y2-axis.title="Y2 Axis Title"
+      y-axis.title="总能耗 (KW·h)"
+      y2-axis.title="升降幅 (%)"
       selection-mode="single"
       selection="{{selectedItemsValue}}"
       on-selection-changed="[[selectionListener]]"

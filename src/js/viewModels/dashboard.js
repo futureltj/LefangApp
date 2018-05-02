@@ -21,14 +21,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         self.splitterValue = ko.observable(0.5);
         
         /* chart data */
-        var dualYSeries = [{name: "Series 1", items: [42, 55, 36, 22]},
-                           {name: "Series 2", items: [32, 39, 36, 27]},
-                           {name: "Series 3", items: [34, 30, 50, 46], assignedToY2: "on"}];
+        var dualYSeries = [{name: "2016年", items: [2, 55, 36, 22]},
+                           {name: "2017年", items: [42, 55, 36, 22]},
+                           {name: "2018年", items: [32, 39, 36, 27]},
+                           {name: "v2016环比升降幅(%)", items: [34, -3, -40, -6], assignedToY2: "on"},
+                           {name: "v2017环比升降幅(%)", items: [34, 30, -50, 46], assignedToY2: "on"}];
                            
-        var dualYSeries2 = [{name: "Series 1", items: [2, 55, 36, 22]},
-                           {name: "Series 2", items: [32, 39, 36, 27]},
-                           {name: "Series 3", items: [34, 30, 50, 46], assignedToY2: "on"}];
-        var dualYGroups = ["Group A", "Group B", "Group C", "Group D"];        
+        var dualYSeries2 = [{name: "2016年", items: [2, 55, 36, 22]},
+                            {name: "2017年", items: [2, 55, 36, 22]},
+                           {name: "2018年", items: [32, 39, 36, 27]},
+                           {name: "v2016同比升降幅(%)", items: [-34, 30, -50, 46], assignedToY2: "on"},
+                           {name: "v2017同比升降幅(%)", items: [0, -16, -50, 36], assignedToY2: "on"}];
+        var dualYGroups = ["一月", "二月", "三月", "四月"];        
    
         self.barSeriesValue = ko.observableArray(dualYSeries);
         self.barGroupsValue = ko.observableArray(dualYGroups);
@@ -46,7 +50,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
           {id: 'tong', label: '同比'},
           {id: 'huan',    label: '环比'},
       ];
-      self.button2Text=ko.observable('tong');
+      self.button2Text=ko.observable('huan');
 
       self.buttonClick = function(event) {
         if(event.detail.value==='tong'){
