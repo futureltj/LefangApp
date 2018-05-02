@@ -21,9 +21,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
        // Router setup
        self.router = oj.Router.rootInstance;
        self.router.configure({
-         'dashboard': {label: '能耗', isDefault: true},
-         'incidents': {label: '温度'},
-         'customers': {label: '看板'},
+         'dashboard': {label: 'Dashboard', isDefault: true},
+         'incidents': {label: 'Incidents'},
+         'customers': {label: 'Customers'},
          'about': {label: 'About'}
        });
       oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
@@ -50,9 +50,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
 
       // Navigation setup
       var navData = [
-      {name: 'Dashboard', id: 'dashboard',
+      {name: '能耗', id: 'dashboard',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
-      {name: 'Incidents', id: 'incidents',
+      {name: '温度', id: 'incidents',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'},
       {name: 'Customers', id: 'customers',
        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'},
