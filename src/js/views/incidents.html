@@ -3,18 +3,20 @@
  The Universal Permissive License (UPL), Version 1.0
  -->
 <div class="oj-hybrid-padding">
-  <h1>月度能耗</h1>
+
+  <h2>月度能耗</h2>
   <oj-select-one id="basicSelect" value="{{val}}"  on-value-changed="[[valueChangedHandler]]"  style="max-width:20em">
     <oj-option value="2">2月份</oj-option>
     <oj-option value="3">3月份</oj-option>
     <oj-option value="4">4月份</oj-option>
   </oj-select-one>
+
   <div>
     <div class="oj-flex-item" style="display:inline-block;">
-      <h3 >April</h3>
+      <h3>四月</h3>
       <div style="word-spacing:6px;margin-left:6px;">S M T W T F S</div>
       <oj-picto-chart id='pictochart4'
-        items="[[aprilItems]]"
+        items="[[aprItems]]"
         layout="horizontal"
         row-height="20" column-count="7"
         tooltip.renderer="[[tooltipFunction]]">

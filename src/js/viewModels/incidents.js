@@ -17,11 +17,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         console.log(event.detail.value);
       }
 
-      var data = {
-        "January" :  [39,42,42,56,49,22,23,21,33,23,37,39,36,32,35,43,32,42,42,40,36,40,39,39,42,31,30,34,36,38,26],
-        "February" :  [36,34,26,43,42,27,40,37,29,40,34,40,21,32,25,21,27,33,27,19,32,43,38,24,37,32,30,29],
-        "March": [31,39,37,45,40,27,38,49,54,53,59,47,43,51,44,52,57,39,43,38,47,43,38,45,49,62,46,40,46,54,47],
-        "April": [51,67,64,60,61,63,62,45,43,56,57,66,68,65,72,64,71,80,64,57,65,69,52,52,62,64,62,71,78,67]};
+
+      var high = {
+        "二月" :  [6,7,2,4,5,4,7,6,10,8,9,7,12,17,9,11,11,11,9,9,9,15,15,13,11,13,16,15],
+        "三月": [14,12,18,24,10,11,10,11,11,14,17,20,24,23,20,11,13,15,11,10,9,15,19,21,22,22,23,25,24,20,22],
+        "四月": [27,24,24,16,16,16,14,21,26,29,29,21,20,18,20,21,21,24,27,27,26,28,24,16,22,22,27,26,23,31]};
+      var low = {
+        "二月" :  [1,-2,-3,-3,-2,-2,-1,1,4,0,-1,0,3,7,5,3,6,7,6,6,5,4,6,8,4,6,12,8],
+        "三月": [7,7,11,7,7,7,7,3,4,6,8,13,14,16,9,9,10,10,7,6,5,8,10,13,13,13,14,14,14,13,14],
+        "四月": [16,17,17,12,11,7,7,12,16,17,16,15,15,12,10,10,12,14,16,17,19,20,13,12,13,15,15,18,19,22]};
         var colorHandler = new oj.ColorAttributeGroupHandler();
         var legendItems = [];
         var temp = ["-10～-5°C","-5～0°C","0～5°C","5～10°C","10～15°C","15～20°C","20～25°C","≥26°C"];
@@ -29,18 +33,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
   
         var getPictoItems = function (month, monthIndex){
           var pictoItems = [];
-          var values = data[month];
-          var firstDay = (new Date(2015, monthIndex, 1)).getDay();
+          var h_values = high[month];
+          var l_values = low[month];
+          var firstDay = (new Date(2018, monthIndex, 1)).getDay();
           var pointer = 0;
-          for (var i = 0; i < values.length; i++) {
-            var val = values[i];
+          for (var i = 0; i < h_values.length; i++) {
+            var high_val = h_values[i];
+            var low_val = l_values[i];
             if(pointer < firstDay){
               pictoItems.push({name: '', color: 'rgba(0,0,0,0)'});
               pointer++;
               i--;
             }
             else
-              pictoItems.push({name: month+' '+(i+1)+" ("+val+"°C)", color: "#"+colors[Math.floor(val/10)-1]});
+              pictoItems.push({shape: 'circle', name: month+' '+(i+1)+"日 <br>最<b style='color:red'>高</b>气温 "+high_val+"°C <br>最<b style='color:blue'>低</b>气温 "+low_val+"°C", color: "#"+colors[Math.floor((high_val+low_val)/10)+2]});
           }
           return pictoItems;
         }
@@ -49,10 +55,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
           legendItems.push({text: temp[i] , color: "#"+colors[i]});
         };
   
-        this.janItems = ko.observableArray(getPictoItems('January', 0));
-        this.febItems = ko.observableArray(getPictoItems('February', 1));
-        this.marItems = ko.observableArray(getPictoItems('March', 2));
-        this.aprilItems = ko.observableArray(getPictoItems('April', 3));
+        this.febItems = ko.observableArray(getPictoItems('二月', 1));
+        this.marItems = ko.observableArray(getPictoItems('三月', 2));
+        this.aprItems = ko.observableArray(getPictoItems('四月', 3));
         this.legendSections = ko.observableArray([{items: legendItems}]);
   
         this.tooltipFunction = function (dataContext) {
