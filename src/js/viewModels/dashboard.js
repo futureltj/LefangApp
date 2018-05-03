@@ -27,7 +27,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
                            {name: "v2017环比升降幅(%)", items: [34, 30, -50, 46], assignedToY2: "on"}];
                            
         var dualYSeries2 = [{name: "2016年", items: [2, 55, 36, 22]},
-                            {name: "2017年", items: [2, 55, 36, 22]},
+                            {name: "2017年", items: [42, 55, 36, 22]},
                            {name: "2018年", items: [32, 39, 36, 27]},
                            {name: "v2016同比升降幅(%)", items: [-34, 30, -50, 46], assignedToY2: "on"},
                            {name: "v2017同比升降幅(%)", items: [0, -16, -50, 36], assignedToY2: "on"}];
