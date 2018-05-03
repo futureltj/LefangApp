@@ -63,10 +63,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
 
       var colorHandler = new oj.ColorAttributeGroupHandler();
 
-      /* chart data */
-      var mathScores = [80, 80, 85, 68, 65, 77, 73, 75, 63, 68, 69, 65, 59, 57, 61];
-      var engScores = [51, 47, 56, 49, 48, 59, 59, 58, 58, 62, 66, 79, 74, 78, 85];
-
       // 一层后门出风口温湿度
       var d5000187_hum_hi = {
         "二月": [32.5, 29.5, 27.4, 22.9, 27.3, 27.7, 33.8, 32.2, 45.2, 41.4, 29.8, 23.5, 35.9, 39.6, 44.4, 46, 47.3, 55.7, 54.2, 50.2, 48.8, 46.7, 47, 55.3, 49.5, 47.6, 60.5, 60.2],
@@ -76,7 +72,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
       var d5000187_hum_avg = {
         "二月": [24.37, 19.84, 15.37, 12.43, 14.92, 17.66, 19.7, 20.26, 27.87, 21.52, 13.56, 13.09, 20.42, 26.34, 33.39, 35.56, 33.95, 42.2, 40.59, 38.23, 37.12, 30.81, 30.58, 38.08, 29.69, 31.91, 37.34, 38.49],
         "三月": [26.94, 37.18, 45.74, 57.34, 45.66, 49.8, 38.5, 29.32, 29.83, 39.36, 42.87, 51.06, 58.04, 61.33, 57.62, 33.8, 36.63, 41.6, 32.25, 33.62, 33.76, 34.68, 43.67, 47.04, 48.44, 51.73, 51.13, 50.53, 54.38, 53.04, 49.17],
-        "四月": [255.35, 58.97, 59.44, 47.7, 48.98, 33.45, 25.12, 37.5, 41.46, 48.13, 40.3, 43.12, 57.57, 50.4, 39.16, 36.64, 38.5, 47.13, 52.47, 56.47, 62.47, 72.14, 61.12, 50.23, 45.34, 41.37, 46.16, 53.88, 66.08, 77.64]
+        "四月": [55.35, 58.97, 59.44, 47.7, 48.98, 33.45, 25.12, 37.5, 41.46, 48.13, 40.3, 43.12, 57.57, 50.4, 39.16, 36.64, 38.5, 47.13, 52.47, 56.47, 62.47, 72.14, 61.12, 50.23, 45.34, 41.37, 46.16, 53.88, 66.08, 77.64]
       };
       var d5000187_hum_low = {
         "二月": [9.6, 10, 8, 3.3, 4.9, 6.9, 5.3, 8.5, 13.2, 11.3, 7.3, 3.7, 7.2, 15.5, 15.4, 18.5, 14.8, 23.4, 23.3, 19.5, 19.8, 15.3, 11.6, 21.1, 16.2, 18.2, 17.4, 24.5],
@@ -165,14 +161,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
 
       // 一层正门温湿度
       var d500018a_hum_hi = {
-        "二月": [100, 30.1, 29.4, 24.1, 27, 28.8, 29.6, 31.8, 39.2, 41.2, 29.7, 20.8, 30.7, 35.7, 39.2, 39.6, 37.5, 46.7, 48.8, 43.9, 43.8, 39.7, 44.4, 47.1, 46.3, 42.8, 56.6, 62.1],
-        "三月": [54.3, 58.7, 64.3, 73.3, 51.5, 53.2, 57.3, 51.4, 47.8, 50.6, 54.2, 61.4, 65, 69.1, 74.3, 49.5, 51.5, 59.8, 56.6, 54.5, 56.6, 54.1, 58.5, 58.7, 57.9, 58.5, 60.2, 59.3, 61.9, 62.6, 54.8],
-        "四月": [57.6, 63.1, 61.6, 54.9, 57.5, 47.1, 31.6, 41.5, 46.4, 51.5, 57.3, 52.4, 63, 62, 49.6, 38.5, 44.4, 47.7, 54.4, 57.9, 100, 100, 100, 56.6, 48.7, 46.2, 100, 100, 100, 100]
+        "二月": [100,30.1,29.4,24.1,27,28.8,29.6,31.8,39.2,41.2,29.7,20.8,30.7,35.7,39.2,39.6,37.5,46.7,48.8,43.9,43.8,39.7,44.4,47.1,46.3,42.8,56.6,62.1],
+        "三月": [54.3,58.7,64.3,73.3,51.5,53.2,57.3,51.4,47.8,50.6,54.2,61.4,65,69.1,74.3,49.5,51.5,59.8,56.6,54.5,56.6,54.1,58.5,58.7,57.9,58.5,60.2,59.3,61.9,62.6,54.8],
+        "四月": [57.6,63.1,61.6,54.9,57.5,47.1,31.6,41.5,46.4,51.5,57.3,52.4,63,62,49.6,38.5,44.4,47.7,54.4,57.9,100,100,100,56.6,48.7,46.2,100,100,100,100]
       };
       var d500018a_hum_avg = {
-        "二月": [57.6, 63.1, 61.6, 54.9, 57.5, 47.1, 31.6, 41.5, 46.4, 51.5, 57.3, 52.4, 63, 62, 49.6, 38.5, 44.4, 47.7, 54.4, 57.9, 100, 100, 100, 56.6, 48.7, 46.2, 100, 100, 100, 100],
-        "三月": [37.03, 47.19, 57.88, 62.34, 51.23, 53.05, 50.81, 39.37, 37.52, 42.64, 44.88, 53.19, 58.06, 64.59, 61.27, 42.03, 44.88, 53.6, 44.87, 47.48, 46.85, 44.46, 48.36, 50.84, 52.14, 53.82, 52.43, 50.47, 54.08, 53.32, 47.46],
-        "四月": [52.56, 58.09, 57.29, 47.59, 48.23, 33.46, 23.9, 34.69, 39.39, 47.5, 41.27, 42.17, 53.28, 50.14, 37.89, 36, 35.66, 42.83, 47.54, 52.24, 59.18, 64.79, 58.4, 48.56, 44.59, 38.48, 44.34, 48.19, 57.8, 64.03]
+        "二月": [29.62,23.66,21.18,17.93,19.77,20.95,24.36,23.46,33.69,26.96,19.45,15.24,23.07,30.41,33.23,35.16,33.71,42.36,41.99,39.59,37.79,34.34,33.49,42.5,36.31,36.24,43.71,48.12],
+        "三月": [37.03,47.19,57.88,62.34,51.23,53.05,50.81,39.37,37.52,42.64,44.88,53.19,58.06,64.59,61.27,42.03,44.88,53.6,44.87,47.48,46.85,44.46,48.36,50.84,52.14,53.82,52.43,50.47,54.08,53.32,47.46],
+        "四月": [52.56,58.09,57.29,47.59,48.23,33.46,23.9,34.69,39.39,47.5,41.27,42.17,53.28,50.14,37.89,36,35.66,42.83,47.54,52.24,59.18,64.79,58.4,48.56,44.59,38.48,44.34,48.19,57.8,64.03]
       };
       var d500018a_hum_low = {
         "二月": [18.4, 17.6, 18.1, 12.7, 14.7, 14, 18.8, 15.1, 27.7, 21.1, 14.2, 9.1, 14.5, 24.6, 30, 32.5, 29.2, 37.3, 39.5, 36.2, 34.4, 28.9, 19.2, 37.4, 31.7, 31.7, 33.8, 40.7],
@@ -207,7 +203,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         return items;
       };
 
-      var getLineSeriesByMonth = function (month) {
+      var getLineTempSeriesByMonth = function (month) {
         return [
           { name: "一层后门出风口温度", items: d5000187_temp_avg[month], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
           { name: "后门温度", items: d5000188_temp_avg[month], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
@@ -215,51 +211,89 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
           { name: "一层正门温度", items: d500018a_temp_avg[month], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
         ];
       };
-      var getLineGroupsByMonth = function (month) {
+      var getLineTempGroupsByMonth = function (month) {
         var lineGroups = [];
         for (var i = 0; i < d500018a_temp_avg[month].length; i++) {
           lineGroups.push(i + 1);
         }
         return lineGroups;
       }
-      this.lineSeriesValue = ko.observableArray(getLineSeriesByMonth("二月"));
-      this.lineGroupsValue = ko.observableArray(getLineGroupsByMonth("二月"));
-      var getyAxisByMonth = function (month) {
+      this.lineSeriesValue = ko.observableArray(getLineTempSeriesByMonth("二月"));
+      this.lineGroupsValue = ko.observableArray(getLineTempGroupsByMonth("二月"));
+      var getLineHumSeriesByMonth = function (month) {
+        return [
+          { name: "一层后门出风口湿度", items: d5000187_hum_avg[month], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
+          { name: "后门湿度", items: d5000188_hum_avg[month], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
+          { name: "地下办公室湿度", items: d5000189_hum_avg[month], categories: ['d5000189'], color: colorHandler.getValue("d5000189") },
+          { name: "一层正门湿度", items: d500018a_hum_avg[month], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
+        ];
+      };
+      var getLineHumGroupsByMonth = function (month) {
+        var lineGroups = [];
+        for (var i = 0; i < d500018a_hum_avg[month].length; i++) {
+          lineGroups.push(i + 1);
+        }
+        return lineGroups;
+      }
+      this.lineSeriesValue2 = ko.observableArray(getLineHumSeriesByMonth("二月"));
+      this.lineGroupsValue2 = ko.observableArray(getLineHumGroupsByMonth("二月"));
+      var getTempyAxisByMonth = function (month) {
         return {
-          title: '温度监控', referenceObjects: [
+          title: '温度监控 (°C)', referenceObjects: [
             {
-              text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi[month], d5000187_temp_low[month]), categories: ['d5000187'],
+              text: '一层后门出风口温度范围', type: 'area', items: createAreaData(d5000187_temp_hi[month], d5000187_temp_low[month]), categories: ['d5000187'],
               color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
             },
             {
-              text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi[month], d5000188_temp_low[month]), categories: ['d5000188'],
+              text: '后门温度范围', type: 'area', items: createAreaData(d5000188_temp_hi[month], d5000188_temp_low[month]), categories: ['d5000188'],
               color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
             },
             {
-              text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi[month], d5000189_temp_low[month]), categories: ['d5000189'],
+              text: '地下办公室温度范围', type: 'area', items: createAreaData(d5000189_temp_hi[month], d5000189_temp_low[month]), categories: ['d5000189'],
               color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
             },
             {
-              text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi[month], d500018a_temp_low[month]), categories: ['d500018a'],
+              text: '一层正门温度范围', type: 'area', items: createAreaData(d500018a_temp_hi[month], d500018a_temp_low[month]), categories: ['d500018a'],
               color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
             }
           ]
         };
       }
-
-      this.yAxisData = ko.observable(getyAxisByMonth("二月"));
-      this.hiddenCategoriesValue = ko.observableArray([]);
+      var getHumyAxisByMonth = function (month) {
+        return {
+          title: '湿度监控 (%RH)', referenceObjects: [
+            {
+              text: '一层后门出风口湿度范围', type: 'area', items: createAreaData(d5000187_hum_hi[month], d5000187_hum_low[month]), categories: ['d5000187'],
+              color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
+            },
+            {
+              text: '后门湿度范围', type: 'area', items: createAreaData(d5000188_hum_hi[month], d5000188_hum_low[month]), categories: ['d5000188'],
+              color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
+            },
+            {
+              text: '地下办公室湿度范围', type: 'area', items: createAreaData(d5000189_hum_hi[month], d5000189_hum_low[month]), categories: ['d5000189'],
+              color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
+            },
+            {
+              text: '一层正门湿度范围', type: 'area', items: createAreaData(d500018a_hum_hi[month], d500018a_hum_low[month]), categories: ['d500018a'],
+              color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
+            }
+          ]
+        };
+      }
+      this.yAxisData = ko.observable(getTempyAxisByMonth("二月"));
+      this.yAxisData2 = ko.observable(getHumyAxisByMonth("二月"));
+      this.hiddenCategoriesValue = ko.observableArray(['d5000188','d5000189']);
       this.highlightedCategoriesValue = ko.observableArray([]);
 
       /* create legend */
-      this.legendSections2 = [{
+      this.legendSections1 = [{
         items: [
-          { color: colorHandler.getValue("d5000187"), text: "一层后门出风口温度", id: "d5000187" },
-          { color: colorHandler.getValue("d5000188"), text: "后门温度", id: "d5000188" },
-          { color: colorHandler.getValue("d5000189"), text: "地下办公室温度", id: "d5000189" },
-          { color: colorHandler.getValue("d500018a"), text: "一层正门温度", id: "d500018a" }]
+          { color: colorHandler.getValue("d5000187"), text: "后门出风口", id: "d5000187" },
+          { color: colorHandler.getValue("d5000188"), text: "后门", id: "d5000188" },
+          { color: colorHandler.getValue("d5000189"), text: "地下办公室", id: "d5000189" },
+          { color: colorHandler.getValue("d500018a"), text: "1F正门", id: "d500018a" }]
       }];
-
 
       this.val = ko.observable("2");
       this.valueChangedHandler = function (event) {
@@ -271,24 +305,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         */
         if (event.detail.value == "2") {
           self.aprItems(getPictoItems('二月', 1))
-          self.lineGroupsValue(getLineGroupsByMonth("二月"));
-          self.yAxisData(getyAxisByMonth("二月"));
-          self.lineSeriesValue(getLineSeriesByMonth("二月"));
-          
-
+          self.lineGroupsValue(getLineTempGroupsByMonth("二月"));
+          self.lineGroupsValue2(getLineHumGroupsByMonth("二月"));
+          self.yAxisData(getTempyAxisByMonth("二月"));
+          self.yAxisData2(getHumyAxisByMonth("二月"));
+          self.lineSeriesValue(getLineTempSeriesByMonth("二月"));
+          self.lineSeriesValue2(getLineHumSeriesByMonth("二月"));
         }
+
         if (event.detail.value == "3") {
           self.aprItems(getPictoItems('三月', 2))
-          self.lineGroupsValue(getLineGroupsByMonth("三月"));
-          self.yAxisData(getyAxisByMonth("三月"));
-          self.lineSeriesValue(getLineSeriesByMonth("三月"));
-
+          self.lineGroupsValue(getLineTempGroupsByMonth("三月"));
+          self.lineGroupsValue2(getLineHumGroupsByMonth("三月"));
+          self.yAxisData(getTempyAxisByMonth("三月"));
+          self.yAxisData2(getHumyAxisByMonth("三月"));
+          self.lineSeriesValue(getLineTempSeriesByMonth("三月"));
+          self.lineSeriesValue2(getLineHumSeriesByMonth("三月"));
         }
+
         if (event.detail.value == "4") {
           self.aprItems(getPictoItems('四月', 3))
-          self.lineGroupsValue(getLineGroupsByMonth("四月"));
-          self.yAxisData(getyAxisByMonth("四月"));
-          self.lineSeriesValue(getLineSeriesByMonth("四月"));
+          self.lineGroupsValue(getLineTempGroupsByMonth("四月"));
+          self.lineGroupsValue2(getLineHumGroupsByMonth("四月"));
+          self.yAxisData(getTempyAxisByMonth("四月"));
+          self.yAxisData2(getHumyAxisByMonth("四月"));
+          self.lineSeriesValue(getLineTempSeriesByMonth("四月"));
+          self.lineSeriesValue2(getLineHumSeriesByMonth("四月"));
         }
       }
 

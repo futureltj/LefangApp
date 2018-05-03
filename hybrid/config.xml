@@ -90,7 +90,7 @@
         <splash height="1125" src="res/screen/ios/Default-Portrait-iphone-x-1125h.png" width="2436" />
     </platform>
     <hook src="scripts/hooks/jetAfterPrepare.js" type="after_prepare" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="6.3.0" />
-    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
 </widget>
