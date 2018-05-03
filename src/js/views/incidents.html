@@ -14,11 +14,12 @@
   <div>
     <div class="oj-flex-item" style="display:inline-block;">
 
-      <div style="word-spacing:6px;margin-left:6px;">S M T W T F S</div>
+      <div style="word-spacing:6px;margin-left:6px;width:100%">S M T W T F S</div>
       <oj-picto-chart id='pictochart4'
         items="[[aprItems]]"
         layout="horizontal"
         row-height="20" column-count="7"
+        style="display:inline-block;max-height:250px;width:100%;"
         tooltip.renderer="[[tooltipFunction]]">
       </oj-picto-chart>
     </div>

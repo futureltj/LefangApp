@@ -6,7 +6,7 @@
     <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
 
         <div id='chart-container'>
-            <h2>High Temperature Histogram</h2>
+            <h2>能耗范围统计</h2>
             <oj-chart
                 id="barChart"
                 type="bar"
@@ -14,10 +14,10 @@
                 groups="[[barGroupsValue]]"
                 legend.rendered="off"
                 style-defaults.bar-gap-ratio="0"
-                x-axis.title="Temperature (°F)"
+                x-axis.title="能耗 (KW*h)"
                 x-axis.max-size="150px"
-                y-axis.max="50"
-                y-axis.title="Number of Days"
+                y-axis.max="150"
+                y-axis.title="天数"
                 value-formats.series.tooltip-display="off"
                 value-formats.group.tooltip-label="Temperature"
                 value-formats.value.tooltip-label="Number of Days"
@@ -25,7 +25,7 @@
                 animation-on-data-change="auto"
                 style="width:100%;max-width: 850px;height:300px;">
             </oj-chart>
-
+<!--
             <h2>Low Temperature Histogram</h2>
             <oj-chart
                 id="barChart1"
@@ -45,15 +45,15 @@
                 animation-on-data-change="auto"
                 style="width:100%;max-width: 850px;height:300px;">
             </oj-chart>
-
-            <h2>Daily Temperatures</h2>
+-->
+            <h2>每日能耗</h2>
             <oj-chart
                 id="lineChart"
                 type="line"
                 series="[[lineSeriesValue]]"
                 groups="[[lineGroupsValue]]"
                 legend.rendered="off"
-                y-axis.title="Temperature (°F)"
+                y-axis.title="能耗 (KW*h)"
                 time-axis-type="enabled"
                 value-formats.series.tooltip-display="off"
                 value-formats.value.tooltip-label="Temperature"
