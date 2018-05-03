@@ -4,7 +4,7 @@
  -->
 <div class="oj-hybrid-padding">
 
-  <h2>月度环境监测</h2>
+  <h2>环境温度</h2>
   <oj-select-one id="basicSelect" value="{{val}}"  on-value-changed="[[valueChangedHandler]]"  style="max-width:20em">
     <oj-option value="2">2月份</oj-option>
     <oj-option value="3">3月份</oj-option>
@@ -36,6 +36,7 @@
       halign="center">
     </oj-legend>
   </div>
+  <h2>温湿度监测</h2>
   <div id='chart-container' >
     <oj-chart id="lineChartTemp"
         type="line"
