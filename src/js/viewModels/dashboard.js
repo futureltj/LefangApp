@@ -6,7 +6,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart', 'ojs/ojinputnumber', 'ojs/ojtoolbar'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart', 'ojs/ojinputnumber', 'ojs/ojtoolbar', 'ojs/ojvalidation-number',],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
@@ -20,30 +20,17 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         self.splitterValue = ko.observable(0.5);
         
         /* chart data */
-        /*
-        var dualYSeries = [{name: "2016年", items: [2, 55, 36, 22]},
-                           {name: "2017年", items: [42, 55, 36, 22]},
-                           {name: "2018年", items: [32, 39, 36, 27]},
-                           {name: "v2016环比升降幅(%)", items: [34, -3, -40, -6], assignedToY2: "on"},
-                           {name: "v2017环比升降幅(%)", items: [34, 30, -50, 46], assignedToY2: "on"}];
-                           
-        var dualYSeries2 = [{name: "2016年", items: [2, 55, 36, 22]},
-                            {name: "2017年", items: [42, 55, 36, 22]},
-                           {name: "2018年", items: [32, 39, 36, 27]},
-                           {name: "v2016同比升降幅(%)", items: [-34, 30, -50, 46], assignedToY2: "on"},
-                           {name: "v2017同比升降幅(%)", items: [0, -16, -50, 36], assignedToY2: "on"}];
-        */
 var dualYSeries = [{name: "2016年", items: [640+560, 960+420, 584+511, 4600+386]},
        {name: "2017年", items: [650+420, 620+420, 490+420, 3200+560]},
-       {name: "2018年", items: [540, 743, 1874, 3322]},
-       {name: "v2016环比升降幅(%)", items: [(540-640-560)/(640+560), (743-960-420)/(960+420), (1874-584-511)/(584+511), (3322-4600-386)/(4600+386)], assignedToY2: "on"},
-       {name: "v2017环比升降幅(%)", items: [(540-650-420)/(650+420), (743-620-420)/(620+420), (1874-490-420)/(490+420), (3322-3200-560)/(3200+560)], assignedToY2: "on"}];
+       {name: "2018年", items: [540, 743, 1474, 3322]},
+       {name: "v2016环比升降幅(%)", items: [(540-640-560)/(640+560), (743-960-420)/(960+420), (1474-584-511)/(584+511), (3322-4600-386)/(4600+386)], assignedToY2: "on"},
+       {name: "v2017环比升降幅(%)", items: [(540-650-420)/(650+420), (743-620-420)/(620+420), (1474-490-420)/(490+420), (3322-3200-560)/(3200+560)], assignedToY2: "on"}];
        
 var dualYSeries2 = [{name: "2016年", items: [640+560, 960+420, 584+511, 4600+386]},
        {name: "2017年", items: [650+420, 620+420, 490+420, 3200+560]},
-       {name: "2018年", items: [540, 743, 1874, 3322]},
-       {name: "v2016同比升降幅(%)", items: [(540-640-560)/540, (743-960-420)/743, (1874-584-511)/1874, (3322-4600-386)/3322], assignedToY2: "on"},
-       {name: "v2017同比升降幅(%)", items: [(540-650-420)/540, (743-620-420)/743, (1874-490-420)/1874, (3322-3200-560)/3322], assignedToY2: "on"}];
+       {name: "2018年", items: [540, 743, 1474, 3322]},
+       {name: "v2016同比升降幅(%)", items: [(540-640-560)/540, (743-960-420)/743, (1474-584-511)/1474, (3322-4600-386)/3322], assignedToY2: "on"},
+       {name: "v2017同比升降幅(%)", items: [(540-650-420)/540, (743-620-420)/743, (1474-490-420)/1474, (3322-3200-560)/3322], assignedToY2: "on"}];
 
         var dualYGroups = ["一月", "二月", "三月", "四月"];
         self.barSeriesValue = ko.observableArray(dualYSeries);
@@ -51,6 +38,8 @@ var dualYSeries2 = [{name: "2016年", items: [640+560, 960+420, 584+511, 4600+38
         var converterFactory = oj.Validation.converterFactory('number');
         var decimalConverter = converterFactory.createConverter({minimumFractionDigits: 2, maximumFractionDigits: 2});
         var percentConverter = converterFactory.createConverter({style: 'percent'});
+        self.yAxisConverter = ko.observable(percentConverter);
+        
         /* toggle buttons*/
         self.dualYOptions = [
             {id: 'on', label: 'on', value: 'on'},
