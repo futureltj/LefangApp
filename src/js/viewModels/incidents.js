@@ -289,7 +289,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
       /* create legend */
       this.legendSections1 = [{
         items: [
-          { color: colorHandler.getValue("d5000187"), text: "1F后门出风口", id: "d5000187" },
+          { color: colorHandler.getValue("d5000187"), text: "后门出风口", id: "d5000187" },
           { color: colorHandler.getValue("d5000188"), text: "后门", id: "d5000188" },
           { color: colorHandler.getValue("d5000189"), text: "地下办公室", id: "d5000189" },
           { color: colorHandler.getValue("d500018a"), text: "1F正门", id: "d500018a" }]
