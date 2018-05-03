@@ -10,10 +10,10 @@
     <oj-option value="3">3月份</oj-option>
     <oj-option value="4">4月份</oj-option>
   </oj-select-one>
-
+  <br>
+  <br>
   <div>
     <div class="oj-flex-item" style="display:inline-block;">
-
       <div style="word-spacing:6px;margin-left:6px;width:100%">S M T W T F S</div>
       <oj-picto-chart id='pictochart4'
         items="[[aprItems]]"
@@ -34,20 +34,10 @@
       halign="center">
     </oj-legend>
   </div>
-
+  <br>
+  <br>
   <div id='chart-container' >
-    <oj-legend id="legend1"
-        orientation="horizontal"
-        sections="[[legendSections2]]"
-        halign="center"
-        valign="middle"
-        hidden-categories="{{hiddenCategoriesValue}}"
-        highlighted-categories="{{highlightedCategoriesValue}}"
-        hover-behavior="dim"
-        hide-and-show-behavior="on"
-        style="width:100%;max-width: 650px; height:25px;">
-    </oj-legend>
-    <oj-chart id="lineChart"
+    <oj-chart id="lineChartTemp"
         type="line"
         series="[[lineSeriesValue]]"
         groups="[[lineGroupsValue]]"
@@ -62,5 +52,33 @@
         hover-behavior="dim"
         style="width:100%;max-width: 650px;height:300px;">
     </oj-chart>
-</div>
+    <br>
+    <oj-legend id="legend1"
+        orientation="horizontal"
+        sections="[[legendSections1]]"
+        halign="center"
+        valign="middle"
+        hidden-categories="{{hiddenCategoriesValue}}"
+        highlighted-categories="{{highlightedCategoriesValue}}"
+        hover-behavior="dim"
+        hide-and-show-behavior="on"
+        style="width:100%;max-width: 650px; height:25px;">
+    </oj-legend>
+    <br>
+    <oj-chart id="lineChartHum"
+        type="line"
+        series="[[lineSeriesValue2]]"
+        groups="[[lineGroupsValue2]]"
+        legend.rendered="off"
+        style-defaults.marker-displayed="on"
+        y-axis="[[yAxisData2]]"
+        x-axis.title= ""
+        animation-on-display="auto"
+        animation-on-data-change="auto"
+        hidden-categories="{{hiddenCategoriesValue}}"
+        highlighted-categories="{{highlightedCategoriesValue}}"
+        hover-behavior="dim"
+        style="width:100%;max-width: 650px;height:300px;">
+    </oj-chart>
+  </div>
 </div>
