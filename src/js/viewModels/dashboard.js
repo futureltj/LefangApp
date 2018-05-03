@@ -20,6 +20,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         self.splitterValue = ko.observable(0.5);
         
         /* chart data */
+        /*
         var dualYSeries = [{name: "2016年", items: [2, 55, 36, 22]},
                            {name: "2017年", items: [42, 55, 36, 22]},
                            {name: "2018年", items: [32, 39, 36, 27]},
@@ -31,7 +32,21 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
                            {name: "2018年", items: [32, 39, 36, 27]},
                            {name: "v2016同比升降幅(%)", items: [-34, 30, -50, 46], assignedToY2: "on"},
                            {name: "v2017同比升降幅(%)", items: [0, -16, -50, 36], assignedToY2: "on"}];
-        var dualYGroups = ["一月", "二月", "三月", "四月"];        
+        */
+var dualYSeries = [{name: "2016年", items: [23334, 11300, 12010, 15000]},
+       {name: "2017年", items: [23384, 11400, 12030, 15100]},
+       {name: "2018年", items: [22284, 10400, 11030, 14100]},
+       {name: "v2016环比升降幅(%)", items: [14, -3, 20, -6], assignedToY2: "on"},
+       {name: "v2017环比升降幅(%)", items: [14, 10, -15, 16], assignedToY2: "on"}];
+       
+var dualYSeries2 = [{name: "2016年", items: [23334, 11300, 12010, 15000]},
+{name: "2017年", items: [23384, 11400, 12030, 15100]},
+{name: "2018年", items: [22284, 10400, 11030, 14100]},
+       {name: "v2016同比升降幅(%)", items: [-14, 13, -15, 16], assignedToY2: "on"},
+       {name: "v2017同比升降幅(%)", items: [2, -16, -8, 23], assignedToY2: "on"}];
+       
+       
+           var dualYGroups = ["一月", "二月", "三月", "四月"];        
    
         self.barSeriesValue = ko.observableArray(dualYSeries);
         self.barGroupsValue = ko.observableArray(dualYGroups);
