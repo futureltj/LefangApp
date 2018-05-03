@@ -163,7 +163,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
       "三月": [26.2,38.4,50.3,51.2,50.7,52.9,47.5,34.3,25.2,33.3,30,41.7,48,63,45.9,33.2,36.7,46.5,37.8,43,38.7,34,42.9,38,49.4,47.8,45.2,40.4,41.9,49,33.6],
       "四月": [46.6,54.5,53.6,44.7,44,25,15.6,23.9,28.2,44.6,35.8,32.4,37.5,45.5,31.2,34,25.8,35.8,40.5,46.2,56.4,50.2,51.3,43.5,40.7,31.8,35.4,37.1,51.5,57.1]};
     var d500018a_temp_hi  = {
-      "二月": [125,20.4,21.8,20.9,21.8,20.4,22.7,20.6,24.1,23.1,22.6,20.5,22.3,22.9,23.3,21.8,22.8,22.3,22.7,22.1,22.2,22,23.2,23.4,24.4,23.8,25.4,22.4],
+      "二月": [25,20.4,21.8,20.9,21.8,20.4,22.7,20.6,24.1,23.1,22.6,20.5,22.3,22.9,23.3,21.8,22.8,22.3,22.7,22.1,22.2,22,23.2,23.4,24.4,23.8,25.4,22.4],
       "三月": [25,21.7,24.3,24.2,19,16.5,20.7,19.6,18.3,18.8,20,21.2,23.3,21.3,22.9,22.4,24.3,24.2,22.9,19.5,19.6,22.6,20.6,22.1,22.6,22.9,23.6,24.7,25.1,25.1,25.3],
       "四月": [26.8,26.3,27.8,25.5,23.9,22.1,21.2,23.7,25.1,26.7,26.2,25.4,25.1,23,24.1,23.2,24.3,25.3,26.7,26.9,27.2,28.1,27.2,23.6,25.3,25.4,27.2,27.7,27.9,27.2]};
     var d500018a_temp_avg = {
@@ -176,28 +176,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
       "四月": [23.5,24.6,25,23.1,19.8,19.3,18.6,20,21.6,23.3,24,23.7,22.8,19.4,21.5,21.4,21.5,22.3,23.5,24.3,24.9,25.9,23,21.7,22.3,23.1,23.8,24.8,25.1,25.9]};
 
             // Function to create the histogram data
-            var createRangeData = function (values) {
+            var createAreaData = function (hi_values, low_values) {
               var items = [];
-              for (var i = 0; i < values.length; i++) {
-                items.push({low: values[i] - (5 + Math.random() * 10), high: values[i] + 5 + Math.random() * 10});
+              for (var i = 0; i < hi_values.length; i++) {
+                items.push({high: hi_values[i],
+                            low: low_values[i]});
               }
               return items;
             };
 
-            var lineSeries = [{name: "Math Scores", items: mathScores, categories: ['math'], color: colorHandler.getValue("math")},
-              {name: "English Scores", items: engScores, categories: ['english'], color: colorHandler.getValue("english")}];
+            var lineSeries = [
+              {name: "一层后门出风口温度", items: d5000187_temp_avg["二月"], categories: ['d5000187'], color: colorHandler.getValue("d5000187")},
+              {name: "后门温度", items: d5000188_temp_avg["二月"], categories: ['d5000188'], color: colorHandler.getValue("d5000188")},
+              {name: "地下办公室温度", items: d5000189_temp_avg["二月"], categories: ['d5000189'], color: colorHandler.getValue("d5000189")},
+              {name: "一层正门温度", items: d500018a_temp_avg["二月"], categories: ['d500018a'], color: colorHandler.getValue("d500018a")}
+              ];
             var lineGroups = [];
-            for (var i = 0; i < mathScores.length; i++) {
+            for (var i = 0; i < d500018a_temp_avg["二月"].length; i++) {
               lineGroups.push(i + 1);
             }
             this.lineSeriesValue = ko.observableArray(lineSeries);
             this.lineGroupsValue = ko.observableArray(lineGroups);
 
-            var yAxis = {title: 'Test Score', referenceObjects: [
-                {text: 'Math Range', type: 'area', items: createRangeData(mathScores), categories: ['math'],
-                  color: 'rgba(38, 125, 179,0.5)', displayInLegend: 'off', location: 'back'},
-                {text: 'English Range', type: 'area', items: createRangeData(engScores), categories: ['english'],
-                  color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'}
+            var yAxis = {title: '温度监控', referenceObjects: [
+                {text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi["二月"],d5000187_temp_low["二月"]), categories: ['d5000187'],
+                color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'},
+                {text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi["二月"],d5000188_temp_low["二月"]), categories: ['d5000188'],
+                color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'},
+                {text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi["二月"],d5000189_temp_low["二月"]), categories: ['d5000189'],
+                  color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'},
+                {text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi["二月"],d500018a_temp_low["二月"]), categories: ['d500018a'],
+                  color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'}
               ]};
 
             this.yAxisData = ko.observable(yAxis);
@@ -205,8 +214,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
             this.highlightedCategoriesValue = ko.observableArray([]);
 
             /* create legend */
-            this.legendSections2 = [{items: [{color: colorHandler.getValue("math"), text: "Math Scores", id: "math"},
-                            {color: colorHandler.getValue("english"), text: "English Scores", id: "english"}]}];
+            this.legendSections2 = [{items: [
+            {color: colorHandler.getValue("d5000187"), text: "一层后门出风口温度", id: "d5000187"},
+            {color: colorHandler.getValue("d5000188"), text: "后门温度", id: "d5000188"},
+            {color: colorHandler.getValue("d5000189"), text: "地下办公室温度", id: "d5000189"},
+            {color: colorHandler.getValue("d500018a"), text: "一层正门温度", id: "d500018a"}]}];
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
