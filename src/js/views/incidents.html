@@ -10,8 +10,8 @@
     <oj-option value="3">3月份</oj-option>
     <oj-option value="4">4月份</oj-option>
   </oj-select-one>
-  <div>
-    <div class="oj-flex-item" style="display:inline-block;">
+
+  <div style="width:100%;height:220px">
       <div style="word-spacing:6px;margin-left:6px;width:100%">S M T W T F S</div>
       <oj-picto-chart id='pictochart4'
         items="[[aprItems]]"
@@ -20,9 +20,6 @@
         style="display:inline-block;max-height:200px;width:100%;"
         tooltip.renderer="[[tooltipFunction]]">
       </oj-picto-chart>
-    </div>
-    <br>
-    <br>
     <oj-legend 
       id='legend1'
       class="oj-flex-item" 
