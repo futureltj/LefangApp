@@ -10,8 +10,6 @@
     <oj-option value="3">3月份</oj-option>
     <oj-option value="4">4月份</oj-option>
   </oj-select-one>
-  <br>
-  <br>
   <div>
     <div class="oj-flex-item" style="display:inline-block;">
       <div style="word-spacing:6px;margin-left:6px;width:100%">S M T W T F S</div>
@@ -24,11 +22,10 @@
       </oj-picto-chart>
     </div>
     <br>
-    <br>
     <oj-legend 
       id='legend1'
       class="oj-flex-item" 
-      style="display:inline-block;max-height:50px;width:100%;"
+      style="display:inline-block;max-height:80px;width:100%;"
       orientation="horizontal"
       sections="[[legendSections]]"
       symbol-width="15"
@@ -51,7 +48,7 @@
         hidden-categories="{{hiddenCategoriesValue}}"
         highlighted-categories="{{highlightedCategoriesValue}}"
         hover-behavior="dim"
-        style="width:100%;max-width: 650px;height:300px;">
+        style="width:100%;max-width: 650px;height:200px;">
     </oj-chart>
     <br>
     <oj-legend id="legend1"
@@ -63,7 +60,7 @@
         highlighted-categories="{{highlightedCategoriesValue}}"
         hover-behavior="dim"
         hide-and-show-behavior="on"
-        style="width:100%;max-width: 650px; height:25px;">
+        style="width:100%;max-width: 650px; height:35px;">
     </oj-legend>
     <br>
     <oj-chart id="lineChartHum"
@@ -79,7 +76,7 @@
         hidden-categories="{{hiddenCategoriesValue}}"
         highlighted-categories="{{highlightedCategoriesValue}}"
         hover-behavior="dim"
-        style="width:100%;max-width: 650px;height:300px;">
+        style="width:100%;max-width: 650px;height:200px;">
     </oj-chart>
   </div>
 </div>
