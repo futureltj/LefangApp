@@ -207,41 +207,47 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         return items;
       };
 
-      var lineSeries = [
-        { name: "一层后门出风口温度", items: d5000187_temp_avg["二月"], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
-        { name: "后门温度", items: d5000188_temp_avg["二月"], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
-        { name: "地下办公室温度", items: d5000189_temp_avg["二月"], categories: ['d5000189'], color: colorHandler.getValue("d5000189") },
-        { name: "一层正门温度", items: d500018a_temp_avg["二月"], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
-      ];
-      var lineGroups = [];
-      for (var i = 0; i < d500018a_temp_avg["二月"].length; i++) {
-        lineGroups.push(i + 1);
-      }
-      this.lineSeriesValue = ko.observableArray(lineSeries);
-      this.lineGroupsValue = ko.observableArray(lineGroups);
-
-      var yAxis = {
-        title: '温度监控', referenceObjects: [
-          {
-            text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi["二月"], d5000187_temp_low["二月"]), categories: ['d5000187'],
-            color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
-          },
-          {
-            text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi["二月"], d5000188_temp_low["二月"]), categories: ['d5000188'],
-            color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
-          },
-          {
-            text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi["二月"], d5000189_temp_low["二月"]), categories: ['d5000189'],
-            color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
-          },
-          {
-            text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi["二月"], d500018a_temp_low["二月"]), categories: ['d500018a'],
-            color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
-          }
-        ]
+      var getLineSeriesByMonth = function (month) {
+        return [
+          { name: "一层后门出风口温度", items: d5000187_temp_avg[month], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
+          { name: "后门温度", items: d5000188_temp_avg[month], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
+          { name: "地下办公室温度", items: d5000189_temp_avg[month], categories: ['d5000189'], color: colorHandler.getValue("d5000189") },
+          { name: "一层正门温度", items: d500018a_temp_avg[month], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
+        ];
       };
+      var getLineGroupsByMonth = function (month) {
+        var lineGroups = [];
+        for (var i = 0; i < d500018a_temp_avg[month].length; i++) {
+          lineGroups.push(i + 1);
+        }
+        return lineGroups;
+      }
+      this.lineSeriesValue = ko.observableArray(getLineSeriesByMonth("二月"));
+      this.lineGroupsValue = ko.observableArray(getLineGroupsByMonth("二月"));
+      var getyAxisByMonth = function (month) {
+        return {
+          title: '温度监控', referenceObjects: [
+            {
+              text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi[month], d5000187_temp_low[month]), categories: ['d5000187'],
+              color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
+            },
+            {
+              text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi[month], d5000188_temp_low[month]), categories: ['d5000188'],
+              color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
+            },
+            {
+              text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi[month], d5000189_temp_low[month]), categories: ['d5000189'],
+              color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
+            },
+            {
+              text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi[month], d500018a_temp_low[month]), categories: ['d500018a'],
+              color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
+            }
+          ]
+        };
+      }
 
-      this.yAxisData = ko.observable(yAxis);
+      this.yAxisData = ko.observable(getyAxisByMonth("二月"));
       this.hiddenCategoriesValue = ko.observableArray([]);
       this.highlightedCategoriesValue = ko.observableArray([]);
 
@@ -265,126 +271,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         */
         if (event.detail.value == "2") {
           self.aprItems(getPictoItems('二月', 1))
-
-          lineSeries = [
-            { name: "一层后门出风口温度", items: d5000187_temp_avg["二月"], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
-            { name: "后门温度", items: d5000188_temp_avg["二月"], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
-            { name: "地下办公室温度", items: d5000189_temp_avg["二月"], categories: ['d5000189'], color: colorHandler.getValue("d5000189") },
-            { name: "一层正门温度", items: d500018a_temp_avg["二月"], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
-          ];
-          lineGroups = [];
-          for (var i = 0; i < d500018a_temp_avg["二月"].length; i++) {
-            lineGroups.push(i + 1);
-          }
-            
-          
-          yAxis = {
-            title: '温度监控', referenceObjects: [
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi["二月"], d5000187_temp_low["二月"]), categories: ['d5000187'],
-                color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi["二月"], d5000188_temp_low["二月"]), categories: ['d5000188'],
-                color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi["二月"], d5000189_temp_low["二月"]), categories: ['d5000189'],
-                color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi["二月"], d500018a_temp_low["二月"]), categories: ['d500018a'],
-                color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
-              }
-            ]
-          };
-          console.log(yAxis)
-          self.lineGroupsValue(lineGroups);
-          self.yAxisData = ko.observable(yAxis);
-          self.lineSeriesValue(lineSeries);
+          self.lineGroupsValue(getLineGroupsByMonth("二月"));
+          self.yAxisData(getyAxisByMonth("二月"));
+          self.lineSeriesValue(getLineSeriesByMonth("二月"));
           
 
         }
         if (event.detail.value == "3") {
           self.aprItems(getPictoItems('三月', 2))
-
-          lineSeries = [
-            { name: "一层后门出风口温度", items: d5000187_temp_avg["三月"], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
-            { name: "后门温度", items: d5000188_temp_avg["三月"], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
-            { name: "地下办公室温度", items: d5000189_temp_avg["三月"], categories: ['d5000189'], color: colorHandler.getValue("d5000189") },
-            { name: "一层正门温度", items: d500018a_temp_avg["三月"], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
-          ];
-          lineGroups = [];
-          for (var i = 0; i < d500018a_temp_avg["三月"].length; i++) {
-            lineGroups.push(i + 1);
-          }
-          
-
-          yAxis = {
-            title: '温度监控', referenceObjects: [
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi["三月"], d5000187_temp_low["三月"]), categories: ['d5000187'],
-                color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi["三月"], d5000188_temp_low["三月"]), categories: ['d5000188'],
-                color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi["三月"], d5000189_temp_low["三月"]), categories: ['d5000189'],
-                color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi["三月"], d500018a_temp_low["三月"]), categories: ['d500018a'],
-                color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
-              }
-            ]
-          };
-          console.log(yAxis)
-          self.lineGroupsValue(lineGroups);
-          self.yAxisData = ko.observable(yAxis);
-          self.lineSeriesValue(lineSeries);
+          self.lineGroupsValue(getLineGroupsByMonth("三月"));
+          self.yAxisData(getyAxisByMonth("三月"));
+          self.lineSeriesValue(getLineSeriesByMonth("三月"));
 
         }
         if (event.detail.value == "4") {
           self.aprItems(getPictoItems('四月', 3))
-
-          lineSeries = [
-            { name: "一层后门出风口温度", items: d5000187_temp_avg["四月"], categories: ['d5000187'], color: colorHandler.getValue("d5000187") },
-            { name: "后门温度", items: d5000188_temp_avg["四月"], categories: ['d5000188'], color: colorHandler.getValue("d5000188") },
-            { name: "地下办公室温度", items: d5000189_temp_avg["四月"], categories: ['d5000189'], color: colorHandler.getValue("d5000189") },
-            { name: "一层正门温度", items: d500018a_temp_avg["四月"], categories: ['d500018a'], color: colorHandler.getValue("d500018a") }
-          ];
-          lineGroups = [];
-          for (var i = 0; i < d500018a_temp_avg["四月"].length; i++) {
-            lineGroups.push(i + 1);
-          }
-
-          yAxis = {
-            title: '温度监控', referenceObjects: [
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000187_temp_hi["四月"], d5000187_temp_low["四月"]), categories: ['d5000187'],
-                color: 'rgba(35,123,177,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000188_temp_hi["四月"], d5000188_temp_low["四月"]), categories: ['d5000188'],
-                color: 'rgba(104,193,130,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d5000189_temp_hi["四月"], d5000189_temp_low["四月"]), categories: ['d5000189'],
-                color: 'rgba(250,213,92,0.5)', displayInLegend: 'off', location: 'back'
-              },
-              {
-                text: '温度范围', type: 'area', items: createAreaData(d500018a_temp_hi["四月"], d500018a_temp_low["四月"]), categories: ['d500018a'],
-                color: 'rgba(237,102,71,0.5)', displayInLegend: 'off', location: 'back'
-              }
-            ]
-          };
-          console.log(yAxis)
-          self.lineGroupsValue(lineGroups);
-          self.yAxisData = ko.observable(yAxis);
-          self.lineSeriesValue(lineSeries);
-          
+          self.lineGroupsValue(getLineGroupsByMonth("四月"));
+          self.yAxisData(getyAxisByMonth("四月"));
+          self.lineSeriesValue(getLineSeriesByMonth("四月"));
         }
       }
 
