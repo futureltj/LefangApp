@@ -9,7 +9,7 @@
 define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart'],
  function(oj, ko, $) {
   
-    function CustomerViewModel() {
+    function ViewModel() {
       var self = this;
 
       var generateRandomServerData = function(start, interval, numGroups, numSeries) {
@@ -28,35 +28,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
           time = new Date(start + g*interval).toISOString();
           data['groups'].push(time);
         }
+  
         return data;
       }
-      
-      /**
-       * Generates a random count data
-       * @param {Number} start The start time
-       * @param {Number} interval The interval between data points
-       * @param {Number} numGroups Number of groups
-       * @return {Object} Data object containing random data
-       */
+
       var generateRandomCountData = function(start, interval, numGroups) {
         var data = {'groups': [], 'series': []};
         var time, s, g;
         
-        data['series'].push({'name': "Good", 'color': "#68c182", 'items': []});
+        data['series'].push({'name': "d500018b", 'color': "#68c182", 'items': []});
         for (var g = 0; g < numGroups; g++) {
-          var randomValue = Math.round(Math.random() + Math.random() * 500);
+          var randomValue = Math.round(10 + Math.random() * 35);
           data['series'][0]['items'].push(randomValue);
         }
         
-        data['series'].push({'name': "Warning", 'color': "#fad55c", 'items': []});
+        data['series'].push({'name': "d5000180", 'color': "#fad55c", 'items': []});
         for (var g = 0; g < numGroups; g++) {
-          var randomValue = Math.round(Math.random() + Math.random() * 150);
+          var randomValue = Math.round(10 + Math.random() * 35);
           data['series'][1]['items'].push(randomValue);
         }
         
-        data['series'].push({'name': "Critical", 'color': "#ed6647", 'items': []});
+        data['series'].push({'name': "d5000181", 'color': "#ed6647", 'items': []});
         for (var g = 0; g < numGroups; g++) {
-          var randomValue = Math.round(Math.random() + Math.random() * 100);
+          var randomValue = Math.round(10 + Math.random() * 35);
           data['series'][2]['items'].push(randomValue);
         }
   
@@ -65,26 +59,72 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
           data['groups'].push(time);
         }
   
+        console.log(data)
         return data;
       }
+
+      var start = new Date(2018, 2, 1).getTime();
+      var interval = 1000 * 60 * 60 * 24;
+      var numGroups = 87;
+      var mockingData = generateRandomCountData(start, interval, numGroups);
+      self.powerConsumptionSeriesValue = ko.observableArray(mockingData['series']);
+      // self.powerConsumptionGroupsValue = ko.observableArray(mockingData['groups']);
+      self.powerConsumptionGroupsValue = ko.observableArray()
       
-      self.lineXAxis = ko.observable({viewportMin: new Date(2013,7,25), viewportMax: new Date(2013,8,6)});
-      self.barXAxis = ko.observable({viewportMin: new Date(2013,7,25), viewportMax: new Date(2013,8,6)});
-      self.overviewXAxis = ko.observable({viewportMin: new Date(2013,7,25), viewportMax: new Date(2013,8,6)});
+      self.temperatureXAxis = ko.observable({viewportMin: new Date(2018, 2, 1), viewportMax: new Date(2018, 4, 28)});
+      self.powerConsumptionXAxis = ko.observable({viewportMin: new Date(2018, 2, 1), viewportMax: new Date(2018, 4, 28)});
+      self.pressureXAxis = ko.observable({viewportMin: new Date(2018, 2, 1), viewportMax: new Date(2018, 4, 28)});
       
       self.dataCursorPositionValue = ko.observable(null);
-      
-      var start = new Date(2013,6,1).getTime();
-      var interval = 1000*60*60*24;
-      var numGroups = 100;
-      
-      var lineData = generateRandomServerData(start, interval, numGroups, 1);
-      self.lineSeriesValue = ko.observableArray(lineData["series"]);
-      self.lineGroupsValue = ko.observableArray(lineData["groups"]);
-      
-      var barData = generateRandomCountData(start, interval, numGroups);
-      self.barSeriesValue = ko.observableArray(barData["series"]);
-      self.barGroupsValue = ko.observableArray(barData["groups"]);
+
+      self.temperatureSeriesValue = ko.observableArray();
+      self.temperatureGroupsValue = ko.observableArray();
+      $.getJSON('js/data/temperature_data.json', function(data) {
+
+        var series = []
+        for (var i = 0; i < data['series'].length; i++) {
+          var items = []
+          for (var j = 0; j < data['series'][i]['items'].length; j++) {
+            items.push(data['series'][i]['items'][j]['avg'])
+          }
+          series.push({
+            name: data['series'][i]['name'],
+            items: items
+          })
+        }
+        self.temperatureSeriesValue(series)
+
+        var groups = []
+        for (var i = 0; i < data['groups'].length; i++) {
+          groups.push(new Date(data['groups'][i]))
+        }
+        self.temperatureGroupsValue(groups)
+        self.powerConsumptionGroupsValue(groups)
+      })
+
+      self.pressureSeriesValue = ko.observableArray();
+      self.pressureGroupsValue = ko.observableArray();
+      $.getJSON('js/data/pressure_data.json', function(data) {
+
+        var series = []
+        for (var i = 0; i < data['series'].length; i++) {
+          var items = []
+          for (var j = 0; j < data['series'][i]['items'].length; j++) {
+            items.push(data['series'][i]['items'][j]['avg'])
+          }
+          series.push({
+            name: data['series'][i]['name'],
+            items: items
+          })
+        }
+        self.pressureSeriesValue(series)
+
+        var groups = []
+        for (var i = 0; i < data['groups'].length; i++) {
+          groups.push(new Date(data['groups'][i]))
+        }
+        self.pressureGroupsValue(groups)
+      })
       
       // For the bar chart, create a tooltip that displays information for all series at once
       var barTooltip = document.createElement('div');
@@ -93,18 +133,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
       
       self.tooltipCallback = function(dataContext) {
         var groupIndex = (dataContext.group - start) / interval;
-        var numGood = barData['series'][0]['items'][groupIndex];
-        var numWarning = barData['series'][1]['items'][groupIndex];
-        var numCritical = barData['series'][2]['items'][groupIndex];
+        var numGood = mockingData['series'][0]['items'][groupIndex];
+        var numWarning = mockingData['series'][1]['items'][groupIndex];
+        var numCritical = mockingData['series'][2]['items'][groupIndex];
         
         barTooltip.innerHTML = '<span style="visibility: inherit;"><table style="border-collapse:separate; border-spacing:2px;"><tbody><tr>' +
-          '<td ' + tooltipLabelStyle + '>Good</td>' +
+          '<td ' + tooltipLabelStyle + '>d500018b</td>' +
           '<td ' + tooltipValueStyle + '>' + numGood + '</td>' +
           '</tr><tr>' +
-          '<td ' + tooltipLabelStyle + '>Warning</td>' +
+          '<td ' + tooltipLabelStyle + '>d5000180</td>' +
           '<td ' + tooltipValueStyle + '>' + numWarning + '</td>' +
           '</tr><tr>' +
-          '<td ' + tooltipLabelStyle + '>Critical</td>' +
+          '<td ' + tooltipLabelStyle + '>d5000181</td>' +
           '<td ' + tooltipValueStyle + '>' + numCritical + '</td>' +
           '</tr></tbody></table></span>';
                 
@@ -124,12 +164,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
        * @param {object} ui
        */
       self.updateXAxis = function(event) {
-        if (event.target.id != 'overview')
-          self.overviewXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
-        if (event.target.id != 'lineChart')
-          self.lineXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
-        if (event.target.id != 'barChart')
-          self.barXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
+        if (event.target.id != 'pressureChart')
+          self.pressureXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
+        if (event.target.id != 'temperatureChart')
+          self.temperatureXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
+        if (event.target.id != 'powerConsumptionChart')
+          self.powerConsumptionXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
       };
   
       var busyContext = oj.Context.getPageContext().getBusyContext();
@@ -137,67 +177,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         // Find the preferred width of the Y-axes
         // Align the two Y-axes by assigning them the same width
         var axisWidth = Math.max(
-          document.getElementById('lineChart').getYAxis().getPreferredSize(750, 250).width, 
-          document.getElementById('barChart').getYAxis().getPreferredSize(750, 150).width
+          document.getElementById('temperatureChart').getYAxis().getPreferredSize(750, 250).width, 
+          document.getElementById('powerConsumptionChart').getYAxis().getPreferredSize(750, 150).width,
+          document.getElementById('pressureChart').getYAxis().getPreferredSize(750, 100).width
         );
         self.axisWidthValue(axisWidth+'px');
-        
-        // The code above will trigger renders at the right size, update the overview chart after.
-        var busyContext = oj.Context.getPageContext().getBusyContext();
-        busyContext.whenReady().then(function () {
-          // Align the overview to the chart plot areas
-          var resizeOverviewChart = function () {
-            oj.ComponentBinding.deliverChanges(); // force chart to rerender before we extract the bounds
-            var chartBounds = document.getElementById('lineChart').getPlotArea().bounds;
-            var chartBoundsYAxis = document.getElementById('lineChart').getYAxis().bounds;
-            $('#overview').width(chartBounds.width + chartBoundsYAxis.width);
-            $('#overview').css('margin-left', chartBoundsYAxis.width);
-          };
-        
-          resizeOverviewChart();
-          
-          $(window).resize(function () {
-            setTimeout(resizeOverviewChart, 300);
-          });
-        });
       });
-
-      // Below are a set of the ViewModel methods invoked by the oj-module component.
-      // Please reference the oj-module jsDoc for additional information.
-
-      /**
-       * Optional ViewModel method invoked after the View is inserted into the
-       * document DOM.  The application can put logic that requires the DOM being
-       * attached here. 
-       * This method might be called multiple times - after the View is created 
-       * and inserted into the DOM and after the View is reconnected 
-       * after being disconnected.
-       */
-      self.connected = function() {
-        // Implement if needed
-      };
-
-      /**
-       * Optional ViewModel method invoked after the View is disconnected from the DOM.
-       */
-      self.disconnected = function() {
-        // Implement if needed
-      };
-
-      /**
-       * Optional ViewModel method invoked after transition to the new View is complete.
-       * That includes any possible animation between the old and the new View.
-       */
-      self.transitionCompleted = function() {
-        // Implement if needed
-      };
     }
 
-    /*
-     * Returns a constructor for the ViewModel so that the ViewModel is constructed
-     * each time the view is displayed.  Return an instance of the ViewModel if
-     * only one instance of the ViewModel is needed.
-     */
-    return new CustomerViewModel();
+    return new ViewModel();
   }
 );
