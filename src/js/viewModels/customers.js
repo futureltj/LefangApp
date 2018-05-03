@@ -28,7 +28,6 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
           time = new Date(start + g*interval).toISOString();
           data['groups'].push(time);
         }
-  l
         return data;
       }
       
