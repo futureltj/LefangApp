@@ -72,7 +72,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
       var d5000187_hum_avg = {
         "二月": [24.37, 19.84, 15.37, 12.43, 14.92, 17.66, 19.7, 20.26, 27.87, 21.52, 13.56, 13.09, 20.42, 26.34, 33.39, 35.56, 33.95, 42.2, 40.59, 38.23, 37.12, 30.81, 30.58, 38.08, 29.69, 31.91, 37.34, 38.49],
         "三月": [26.94, 37.18, 45.74, 57.34, 45.66, 49.8, 38.5, 29.32, 29.83, 39.36, 42.87, 51.06, 58.04, 61.33, 57.62, 33.8, 36.63, 41.6, 32.25, 33.62, 33.76, 34.68, 43.67, 47.04, 48.44, 51.73, 51.13, 50.53, 54.38, 53.04, 49.17],
-        "四月": [255.35, 58.97, 59.44, 47.7, 48.98, 33.45, 25.12, 37.5, 41.46, 48.13, 40.3, 43.12, 57.57, 50.4, 39.16, 36.64, 38.5, 47.13, 52.47, 56.47, 62.47, 72.14, 61.12, 50.23, 45.34, 41.37, 46.16, 53.88, 66.08, 77.64]
+        "四月": [55.35, 58.97, 59.44, 47.7, 48.98, 33.45, 25.12, 37.5, 41.46, 48.13, 40.3, 43.12, 57.57, 50.4, 39.16, 36.64, 38.5, 47.13, 52.47, 56.47, 62.47, 72.14, 61.12, 50.23, 45.34, 41.37, 46.16, 53.88, 66.08, 77.64]
       };
       var d5000187_hum_low = {
         "二月": [9.6, 10, 8, 3.3, 4.9, 6.9, 5.3, 8.5, 13.2, 11.3, 7.3, 3.7, 7.2, 15.5, 15.4, 18.5, 14.8, 23.4, 23.3, 19.5, 19.8, 15.3, 11.6, 21.1, 16.2, 18.2, 17.4, 24.5],
@@ -305,24 +305,32 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojpictochart'
         */
         if (event.detail.value == "2") {
           self.aprItems(getPictoItems('二月', 1))
-          self.lineGroupsValue(getLineGroupsByMonth("二月"));
-          self.yAxisData(getyAxisByMonth("二月"));
-          self.lineSeriesValue(getLineSeriesByMonth("二月"));
-          
-
+          self.lineGroupsValue(getLineTempGroupsByMonth("二月"));
+          self.lineGroupsValue2(getLineHumGroupsByMonth("二月"));
+          self.yAxisData(getTempyAxisByMonth("二月"));
+          self.yAxisData2(getHumyAxisByMonth("二月"));
+          self.lineSeriesValue(getLineTempSeriesByMonth("二月"));
+          self.lineSeriesValue2(getLineHumSeriesByMonth("二月"));
         }
+
         if (event.detail.value == "3") {
           self.aprItems(getPictoItems('三月', 2))
-          self.lineGroupsValue(getLineGroupsByMonth("三月"));
-          self.yAxisData(getyAxisByMonth("三月"));
-          self.lineSeriesValue(getLineSeriesByMonth("三月"));
-
+          self.lineGroupsValue(getLineTempGroupsByMonth("三月"));
+          self.lineGroupsValue2(getLineHumGroupsByMonth("三月"));
+          self.yAxisData(getTempyAxisByMonth("三月"));
+          self.yAxisData2(getHumyAxisByMonth("三月"));
+          self.lineSeriesValue(getLineTempSeriesByMonth("三月"));
+          self.lineSeriesValue2(getLineHumSeriesByMonth("三月"));
         }
+
         if (event.detail.value == "4") {
           self.aprItems(getPictoItems('四月', 3))
-          self.lineGroupsValue(getLineGroupsByMonth("四月"));
-          self.yAxisData(getyAxisByMonth("四月"));
-          self.lineSeriesValue(getLineSeriesByMonth("四月"));
+          self.lineGroupsValue(getLineTempGroupsByMonth("四月"));
+          self.lineGroupsValue2(getLineHumGroupsByMonth("四月"));
+          self.yAxisData(getTempyAxisByMonth("四月"));
+          self.yAxisData2(getHumyAxisByMonth("四月"));
+          self.lineSeriesValue(getLineTempSeriesByMonth("四月"));
+          self.lineSeriesValue2(getLineHumSeriesByMonth("四月"));
         }
       }
 

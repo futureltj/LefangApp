@@ -4,7 +4,7 @@
  -->
 <div class="oj-hybrid-padding">
 
-  <h2>月度能耗</h2>
+  <h2>月度环境监测</h2>
   <oj-select-one id="basicSelect" value="{{val}}"  on-value-changed="[[valueChangedHandler]]"  style="max-width:20em">
     <oj-option value="2">2月份</oj-option>
     <oj-option value="3">3月份</oj-option>
@@ -23,6 +23,8 @@
         tooltip.renderer="[[tooltipFunction]]">
       </oj-picto-chart>
     </div>
+    <br>
+    <br>
     <oj-legend 
       id='legend1'
       class="oj-flex-item" 
@@ -34,8 +36,6 @@
       halign="center">
     </oj-legend>
   </div>
-  <br>
-  <br>
   <div id='chart-container' >
     <oj-chart id="lineChartTemp"
         type="line"
