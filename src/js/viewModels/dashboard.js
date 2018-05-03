@@ -33,21 +33,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
                            {name: "v2016同比升降幅(%)", items: [-34, 30, -50, 46], assignedToY2: "on"},
                            {name: "v2017同比升降幅(%)", items: [0, -16, -50, 36], assignedToY2: "on"}];
         */
-var dualYSeries = [{name: "2016年", items: [23334, 11300, 12010, 15000]},
-       {name: "2017年", items: [23384, 11400, 12030, 15100]},
-       {name: "2018年", items: [22284, 10400, 11030, 14100]},
-       {name: "v2016环比升降幅(%)", items: [14, -3, 20, -6], assignedToY2: "on"},
-       {name: "v2017环比升降幅(%)", items: [14, 10, -15, 16], assignedToY2: "on"}];
+var dualYSeries = [{name: "2016年", items: [640+560, 960+420, 584+511, 4600+386]},
+       {name: "2017年", items: [650+420, 620+420, 490+420, 3200+560]},
+       {name: "2018年", items: [540, 743, 1874, 3322]},
+       {name: "v2016环比升降幅(%)", items: [(540-640-560)/(640+560), (743-960-420)/(960+420), (1874-584-511)/(584+511), (3322-4600-386)/(4600+386)], assignedToY2: "on"},
+       {name: "v2017环比升降幅(%)", items: [(540-650-420)/(650+420), (743-620-420)/(620+420), (1874-490-420)/(490+420), (3322-3200-560)/(3200+560)], assignedToY2: "on"}];
        
-var dualYSeries2 = [{name: "2016年", items: [23334, 11300, 12010, 15000]},
-{name: "2017年", items: [23384, 11400, 12030, 15100]},
-{name: "2018年", items: [22284, 10400, 11030, 14100]},
-       {name: "v2016同比升降幅(%)", items: [-14, 13, -15, 16], assignedToY2: "on"},
-       {name: "v2017同比升降幅(%)", items: [2, -16, -8, 23], assignedToY2: "on"}];
-       
-       
-           var dualYGroups = ["一月", "二月", "三月", "四月"];        
-   
+var dualYSeries2 = [{name: "2016年", items: [640+560, 960+420, 584+511, 4600+386]},
+       {name: "2017年", items: [650+420, 620+420, 490+420, 3200+560]},
+       {name: "2018年", items: [540, 743, 1874, 3322]},
+       {name: "v2016同比升降幅(%)", items: [(540-640-560)/540, (743-960-420)/743, (1874-584-511)/1874, (3322-4600-386)/3322], assignedToY2: "on"},
+       {name: "v2017同比升降幅(%)", items: [(540-650-420)/540, (743-620-420)/743, (1874-490-420)/1874, (3322-3200-560)/3322], assignedToY2: "on"}];
+
+        var dualYGroups = ["一月", "二月", "三月", "四月"];
         self.barSeriesValue = ko.observableArray(dualYSeries);
         self.barGroupsValue = ko.observableArray(dualYGroups);
         var converterFactory = oj.Validation.converterFactory('number');
