@@ -29,12 +29,14 @@
   </oj-chart>
   </div>
   <div align="center">
-      <oj-buttonset-one id="drinkset" value="{{button2Text}}" on-value-changed="[[buttonClick]]">
-          <!-- ko foreach: drinkValues -->
-          <oj-option value='[[id]]'>
-              <span data-bind="text: label"></span>
+      <oj-buttonset-one id="drinkset" value="{{button2Text}}" on-value-changed="[[buttonClick]]" style="border: 0px;" >
+          
+          <oj-option value='tong' style="border: 0px;" data-bind="style: { 'background-color': button2Text() =='tong' ? '#027bc7' : '#cbcccd' }">
+              <span >同比</span>
           </oj-option>
-          <!-- /ko -->
+          <oj-option value='huan' style="border: 0px"  data-bind="style: { 'background-color': button2Text() =='huan' ? '#027bc7' : '#cbcccd' }">
+            <span >环比</span>
+        </oj-option>
       </oj-buttonset-one>
   </div>
 </div>
