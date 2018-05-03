@@ -4,7 +4,70 @@
  -->
 <div class="oj-hybrid-padding">
   <h1>Customers Content Area</h1>
-  <div>
-      To change the content of this section, you will make edits to the customers.html file located in the /js/views folder.
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+        
+    <div id='chart-container'>  
+      <oj-chart id="lineChart"
+        type="lineWithArea"
+        series="[[lineSeriesValue]]"
+        groups="[[lineGroupsValue]]"
+        time-axis-type="enabled"
+        zoom-and-scroll="live"
+        on-oj-viewport-change="[[updateXAxis]]"
+        on-oj-viewport-change-input="[[updateXAxis]]"
+        overview.rendered="on" overview.height="0"
+        x-axis="[[lineXAxis]]"
+        y-axis.title="Response Time (s)"
+        y-axis.size="[[axisWidthValue]]"
+        legend.max-size="25%" legend.position="end"
+        data-cursor="on" data-cursor-behavior="snap" 
+        data-cursor-position="{{dataCursorPositionValue}}"
+        value-formats.series.tooltip-label="Server"
+        value-formats.group.tooltip-label="Date"
+        value-formats.value.tooltip-label="Time"
+        style="width:100%;max-width:750px;height:250px;">
+      </oj-chart>
+      <oj-chart id="barChart"
+        type="bar" 
+        series="[[barSeriesValue]]"
+        groups="[[barGroupsValue]]" 
+        stack="on"
+        time-axis-type="enabled"
+        zoom-and-scroll="live"
+        on-oj-viewport-change="[[updateXAxis]]"
+        on-oj-viewport-change-input="[[updateXAxis]]"
+        overview.rendered="on" overview.height="0"
+        x-axis="[[barXAxis]]"
+        y-axis.title="Count" 
+        y-axis.size="[[axisWidthValue]]" 
+        legend.max-size="25%" legend.position="end"
+        tooltip.renderer="[[tooltipCallback]]"
+        style-defaults.bar-gap-ratio="0.5"
+        style-defaults.data-cursor.marker-displayed="off"
+        data-cursor="on" data-cursor-behavior="snap" 
+        data-cursor-position="{{dataCursorPositionValue}}"
+        value-formats.series.tooltip-label="Status"
+        value-formats.group.tooltip-label="Date"
+        value-formats.value.tooltip-label="Count"
+        style="width:100%;max-width:750px;height:150px;">
+      </oj-chart>
+      <div id="overviewContainer">
+        <oj-chart id="overview"
+          type="area" 
+          series="[[lineSeriesValue]]"
+          groups="[[lineGroupsValue]]"
+          time-axis-type="enabled"
+          zoom-and-scroll="live"
+          on-oj-viewport-change="[[updateXAxis]]"
+          on-oj-viewport-change-input="[[updateXAxis]]"
+          overview.rendered="on" overview.height="100%"
+          x-axis="[[overviewXAxis]]"
+          legend.rendered="off"
+          style="width:100%;height:100px;">
+        </oj-chart>
+      </div>
+    </div>
+
+    
   </div>
 </div>
