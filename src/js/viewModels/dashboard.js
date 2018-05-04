@@ -6,13 +6,11 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart', 'ojs/ojinputnumber', 'ojs/ojtoolbar', 'ojs/ojvalidation-number',],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart', 'ojs/ojinputnumber', 'ojs/ojtoolbar', 'ojs/ojvalidation-number'],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
       var self = this;
-
-      
 
       self.stackValue = ko.observable('off');
         self.dualY = ko.observable('on');

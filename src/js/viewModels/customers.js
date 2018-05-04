@@ -6,7 +6,7 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojchart', 'ojs/ojvalidation-number'],
  function(oj, ko, $) {
   
     function ViewModel() {
@@ -17,7 +17,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         var time, s, g;
         
         for (s = 0; s < numSeries; s++) {
-          data['series'].push({'name': "Server " + (s+1), 'items': []});
+          data['series'].push({'name': "温度: " + (s+1), 'items': []});
           for (var g = 0; g < numGroups; g++) {
             var randomValue = (Math.random() + Math.random()) / (s+1);
             data['series'][s]['items'].push(randomValue);
@@ -36,19 +36,19 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         var data = {'groups': [], 'series': []};
         var time, s, g;
         
-        data['series'].push({'name': "d500018b", 'color': "#68c182", 'items': []});
+        data['series'].push({'name': "P01", 'color': "#68c182", 'items': []});
         for (var g = 0; g < numGroups; g++) {
           var randomValue = Math.round(10 + Math.random() * 35);
           data['series'][0]['items'].push(randomValue);
         }
         
-        data['series'].push({'name': "d5000180", 'color': "#fad55c", 'items': []});
+        data['series'].push({'name': "P02", 'color': "#fad55c", 'items': []});
         for (var g = 0; g < numGroups; g++) {
           var randomValue = Math.round(10 + Math.random() * 35);
           data['series'][1]['items'].push(randomValue);
         }
         
-        data['series'].push({'name': "d5000181", 'color': "#ed6647", 'items': []});
+        data['series'].push({'name': "P03", 'color': "#ed6647", 'items': []});
         for (var g = 0; g < numGroups; g++) {
           var randomValue = Math.round(10 + Math.random() * 35);
           data['series'][2]['items'].push(randomValue);
@@ -63,7 +63,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         return data;
       }
 
-      var start = new Date(2018, 2, 1).getTime();
+      var start = new Date(2018, 2, 15).getTime();
       var interval = 1000 * 60 * 60 * 24;
       var numGroups = 87;
       var mockingData = generateRandomCountData(start, interval, numGroups);
@@ -71,9 +71,9 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
       // self.powerConsumptionGroupsValue = ko.observableArray(mockingData['groups']);
       self.powerConsumptionGroupsValue = ko.observableArray()
       
-      self.temperatureXAxis = ko.observable({viewportMin: new Date(2018, 2, 1), viewportMax: new Date(2018, 4, 28)});
-      self.powerConsumptionXAxis = ko.observable({viewportMin: new Date(2018, 2, 1), viewportMax: new Date(2018, 4, 28)});
-      self.pressureXAxis = ko.observable({viewportMin: new Date(2018, 2, 1), viewportMax: new Date(2018, 4, 28)});
+      self.temperatureXAxis = ko.observable({viewportMin: new Date(2018, 1, 4), viewportMax: new Date(2018, 3, 28)});
+      self.powerConsumptionXAxis = ko.observable({viewportMin: new Date(2018, 1, 4), viewportMax: new Date(2018, 3, 28)});
+      self.pressureXAxis = ko.observable({viewportMin: new Date(2018, 1, 4), viewportMax: new Date(2018, 3, 28)});
       
       self.dataCursorPositionValue = ko.observable(null);
 
@@ -138,14 +138,14 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         var numCritical = mockingData['series'][2]['items'][groupIndex];
         
         barTooltip.innerHTML = '<span style="visibility: inherit;"><table style="border-collapse:separate; border-spacing:2px;"><tbody><tr>' +
-          '<td ' + tooltipLabelStyle + '>d500018b</td>' +
-          '<td ' + tooltipValueStyle + '>' + numGood + '</td>' +
+          '<td ' + tooltipLabelStyle + '>一号热泵</td>' +
+          '<td ' + tooltipValueStyle + '>' + numGood + ' KW·h</td>' +
           '</tr><tr>' +
-          '<td ' + tooltipLabelStyle + '>d5000180</td>' +
-          '<td ' + tooltipValueStyle + '>' + numWarning + '</td>' +
+          '<td ' + tooltipLabelStyle + '>二号热泵</td>' +
+          '<td ' + tooltipValueStyle + '>' + numWarning + ' KW·h</td>' +
           '</tr><tr>' +
-          '<td ' + tooltipLabelStyle + '>d5000181</td>' +
-          '<td ' + tooltipValueStyle + '>' + numCritical + '</td>' +
+          '<td ' + tooltipLabelStyle + '>三号热泵</td>' +
+          '<td ' + tooltipValueStyle + '>' + numCritical + ' KW·h</td>' +
           '</tr></tbody></table></span>';
                 
         // Color the tooltip with the status with the highest count
@@ -156,7 +156,22 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
       };
       
       self.axisWidthValue = ko.observable('0'); 
-      
+        var converterFactory = oj.Validation.converterFactory('number');
+            this.currencyConverter = converterFactory.createConverter({
+                style: 'currency',
+                currency: 'CNY'
+            });
+        self.temperatureConverter = {
+            format: function(value) {
+                return value.toFixed(1) + ' °C';
+            }
+        }
+        self.pressureConverter = {
+            format: function(value) {
+                return value.toFixed(2) + ' MPa';
+            }
+        }
+
       /**
        * Updates the X-axis of the correlated components.
        * It does not update the component that fires the event.
@@ -171,7 +186,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojbutton', 'o
         if (event.target.id != 'powerConsumptionChart')
           self.powerConsumptionXAxis({viewportMin: event.detail['xMin'], viewportMax: event.detail['xMax']});
       };
-  
+      
       var busyContext = oj.Context.getPageContext().getBusyContext();
       busyContext.whenReady().then(function () {
         // Find the preferred width of the Y-axes
